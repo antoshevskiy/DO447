@@ -1,0 +1,12 @@
+- name: Install httpd please
+  yum:
+    name: httpd
+    state: latest
+  notify:
+  - Start httpd service
+- name: Create index.html
+  copy:
+    content: "{{web_server_get_content}}"
+    dest: /var/www/html/index.html
+  notify:
+  - Start httpd service

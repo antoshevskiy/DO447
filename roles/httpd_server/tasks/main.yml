@@ -1,0 +1,20 @@
+---
+# tasks file for httpd_server
+
+- name: Run the notified handlers so far
+  meta: flush_handlers
+
+- name: Install httpd please
+  yum:
+    name: httpd
+    state: latest
+  notify:
+  - Restart httpd service
+
+
+- name: Create index.html
+  copy:
+    content: "{{ app_content }}"
+    dest: /var/www/html/index.html
+  notify:
+  - Restart httpd service
