@@ -1,0 +1,14 @@
+- name: Configuration Playbook
+  hosts: all
+  remote_user: devops
+  become: false
+  order: reverse_sorted
+  serial: 1
+  gather_facts: no
+ 
+  tasks:
+  - name: Open Firewall Port 1
+    command: sleep 2
+ 
+  - name: Open Firewall Port 2
+    command: sleep 2

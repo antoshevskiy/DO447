@@ -1,0 +1,52 @@
+- name: Execution Order Testing
+  hosts: servera*
+  gather_facts: yes
+ 
+ 
+  handlers:
+  - name: extra_handler
+    debug:
+      msg: "This is Extra Handler"
+  - name: Services Down
+    debug:
+      msg: "FB Down, Give rest to phone and Sleep"
+  - name: Services UP
+    debug:
+      msg: "FB UP, Piackup Phone and Waste Time"
+ 
+ 
+  tasks:
+  - name: Extra Task in Play
+    command: sleep 2
+    notify:
+    - extra_handler
+  - name: Run a Role based on Condition
+    import_role:
+      name: variable_role
+    when: aaaa is not defined
+ 
+  roles:
+  #- role: depency1
+  #- role: dependen2
+  #- role: security_server
+  - role: web_server
+    become: true
+ 
+  post_tasks:
+  - name: Inform Stake Holders
+    command: sleep 2
+    notify:
+    - Services UP
+ 
+ 
+  pre_tasks:
+  - name: Check the RAM Requirements
+    assert:
+      that:
+      - ansible_facts['memory_mb']['real']['free'] <=400
+      fail_msg: "Sufficient Memory NOT Avaiable"
+      success_msg: "Hurray Everything Good"
+  - name: One More Pre Task
+    command: sleep 2
+    notify:
+    - Services Down

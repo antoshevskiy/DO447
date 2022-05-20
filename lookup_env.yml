@@ -4,6 +4,13 @@
   tasks:
   - name: Print ENV for me
     debug:
+      msg: "{{ item }}"
+    with_env:
+    - 'PS1'
+    - 'HOME'
+    - 'ENV'
+  - name: Print ENV for me
+    debug:
       msg: "{{ lookup('env', 'PS1', 'HOME','ENV') }}"
 
   - name: Print ENV for me one by one

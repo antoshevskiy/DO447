@@ -1,0 +1,39 @@
+- name: List and Dictionary
+  hosts: servera*
+ 
+ 
+  vars_files:
+  - ./newvars.yml
+ 
+  tasks:
+  - name: Print variable for filters
+    debug:
+      msg: "{{ [ 2, [4, [6, 8]], 10 ] | flatten }} "
+      #msg: "{{ somevar | default('NOT APPLICCABLE') }}"
+  - name: Print List
+    debug:
+      msg: "{{ item }}"
+    with_items: "{{ simple_list }}"
+    #loop: "{{ simple_list }}"
+    ## Loop only accepts List 
+    ## List starts with -
+    ## item is reserved variable for loop
+    #
+  - name: Print Complex List
+    debug:
+      msg: "{{ item.first_name | capitalize }} // {{ item.last_name | upper}} {{ complex_list[1].first_name }}"
+    loop: "{{ complex_list }}"
+ 
+ 
+  - name: Print Dictionary 1
+    debug:
+      msg: "{{ item.key }} ----- {{ item.value }}"
+    #with_dict: "{{ mydict }}"
+    loop: "{{ mydict | dict2items }}"
+    #loop came from ansible 2.5 onwards
+  - name: Print Dictionary 2
+    debug:
+      msg: "{{ item }}"
+    with_dict: "{{ complex_list2 | items2dict }}"
+    #loop: "{{ mydict | dict2items }}"
+

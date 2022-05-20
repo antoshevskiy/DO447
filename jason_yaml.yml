@@ -1,0 +1,30 @@
+control:
+  hosts:
+    localhost:
+  vars:
+    ansible_connection: local
+    variable_level: Level 4
+dev:
+  hosts:
+    servera.lab.example.com: {}
+    serverb.lab.example.com:
+      variable_level: Level 10
+    serverd.lab.example.com: {}
+  vars:
+    ansible_become_user: root
+    variable_level: Level 7
+
+prod:
+  hosts:
+    Load_Balancer1:
+      ansible_host: servere.lab.example.com
+      variable_level: Level 4
+    serverf.lab.example.com:
+      variable_level: Level 4
+test:
+  hosts:
+    serverc.lab.example.com:
+      variable_level: Level 4
+    serverd.lab.example.com: {}
+ungrouped: {}
+

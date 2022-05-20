@@ -3,13 +3,15 @@
   gather_facts: no
   tasks:
   - name: Print with loop
-    debug:
-      msg: "eth{{ item }}"
-    with_sequence: start=0 end=4
+    debug:         
+      msg: "{{ item }}"
+    with_sequence: start=0 end=4 format=eth%x
+                   
+  - name: Print with lookup plugin           
+    debug:         
+      msg: "{{ item }}"
+    loop: "{{ query('sequence', 'start=0 end=4 format=eth%x') }}"
 
-  - name: Print with lookup plugin
-    debug:
-      msg: "{{ lookup('sequence', 'start=0 end=4 format=eth%x') }}"
 
   #- name: Print with query plugin
   #  debug:

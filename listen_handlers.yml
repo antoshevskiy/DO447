@@ -1,0 +1,46 @@
+- name: Configuration Playbook
+  hosts: servera*
+  remote_user: devops
+  become: true
+  tasks:
+  - name: Open Firewall Port
+    firewalld:
+      service: http
+      immediate: yes
+      permanent: yes
+      state: enabled
+    notify:
+    - Start firewalld service
+     
+  - name: One Extra Task
+    yum:
+      name: httpd
+      state: latest
+    notify:
+    - Start httpd service
+    #- Extra Handler 2
+    #- some_handler
+     
+     
+  handlers:
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: restarted
+  - name: Start firewalld service
+    service:
+      name: firewalld
+      state: restarted
+  - name: some_handler
+    debug:
+      msg: "I am Piggyback firewalld Handler"
+    listen: Start httpd service
+  - name: Extra Handler 1
+    debug:
+      msg: "I am Extra Handler 1"
+    listen: Start httpd service
+  - name: Extra Handler 2
+    debug:
+      msg: "I am Extra Handler 22 TOO"
+    listen: Start httpd service
+

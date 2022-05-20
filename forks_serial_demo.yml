@@ -1,0 +1,33 @@
+- name: Forks and Serial Demo (Production Environment)
+  hosts: all
+  gather_facts: no
+ 
+  #serial: 7
+  serial:
+  - 10%
+  - 30%
+  - 50%
+  - 100%
+  max_fail_percentage: 35
+  vars:
+    some_failed:
+    - servera.lab.example.com
+    - serverc.lab.example.com
+ 
+  tasks:
+  - name: Inform Client
+    command: sleep 2
+    run_once: yes
+ 
+  - name: Took Server out of Load Balancer
+    command: sleep 2
+ 
+  - name: Update the Package
+    command: sleep 2
+    failed_when: inventory_hostname in some_failed
+ 
+  - name: Deploy new app version2
+    command: sleep 2
+ 
+  - name: Put back on Load Balancer service clients
+    command: sleep 2

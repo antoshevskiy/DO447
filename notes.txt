@@ -5,12 +5,29 @@
 
 
 
-Expereince and Prerequisites:
+Navdeep
+Nav
+Deep
+
+Reading UK
+
+
+
+
+
+Name:
+Org: if possible
+
+Expectations:
+Experience and Prerequisites:
  
 	• Red Hat Certified System Administrator (EX200 / RHCSA) certification or equivalent Red Hat Enterprise Linux knowledge and experience.
-	• Red Hat Certified Specialist in Ansible Automation (EX407) certification, Red Hat Certified Engineer (RHCE) certification on Red Hat Enterprise Linux 8 (EX294), or equivalent Ansible experience.
+	• Red Hat Certified Specialist in Ansible Automation (EX407) certification, Red Hat Certified Engineer (RHCE) certification on Red Hat Enterprise Linux 8 (EX294), or equivalent Ansible experience. DO417
 
+City/Timezone: 
+Hobbies:
 
+EST 2 
 
 
 Chapter 1:
@@ -94,39 +111,15 @@ C.	Global Scope (Command Line Values)
 	
 1. Pre Tasks Tasks
 2. Pre Tasks Handlers
-3. Dependency Role Tasks (firewall)
-4. Main Role Tasks (webserver)
+3. Dependency Role Tasks (security_server)
+4. Main Role Tasks (web_server)
 5. extra tasks in playbook
-6. Dependency Role Handlersttpd
-- mod_ssl
-- httpd-tools
-- mariadb-server
-- mariadb
-- php
-- php-mysqlnd
-7. Main Role Handlers
+6. Dependency Role Handlers (security_server)
+7. Main Role Handlers (web_server)
 8. extra handlers invoked by tasks in playbook
 9. Post Tasks Tasks
 10. Post Tasks Handlers
-ttpd
-- mod_ssl
-- httpd-tools
-- mariadb-server
-- mariadb
-- php
-- php-mysqlnd
-Defined Where:
-become: task
-	ROLEttpd
-- mod_ssl
-- httpd-tools
-- mariadb-server
-- mariadb
-- php
-- php-mysqlnd
-	Block
-	Playbook
-	ansible.cfg
+
 
 
 import_role			include_role
@@ -207,7 +200,7 @@ Vim Block procedure:
 4. Insert(whatever)
 5. esc esc (twice)
 
-
+gather_facts in ANsible Tower ??
 		
 Forks & Serial: Use to implement CI/CD
 
@@ -222,7 +215,7 @@ Forks & Serial: Use to implement CI/CD
 3.	task by task					host by host/play by play
 
 
-4 tasks
+5 tasks
 forks 4
 Hosts: 12
 	Horizontal Direction
@@ -231,10 +224,23 @@ Hosts: 12
 	2	2	2	2		2	2	2	2		2	2	2	2
 	3	3	3	3		3	3	3	3		3	3	3	3
 	4	4	4	4		4	4	4	4		4	4	4     	4
+	5	5	5	5		5	5	5	5		5	5	5	5
+	
+	
+	
+	
+	
 	
 	
 serial: 3
+Vertical Direction:
 	A	B	C		D	E	F 		G 	H 	I	 	J	K	L
+	1	1	1		1	1	1
+	2	2	2		2	2	2
+	3	3	3		3	3	3
+	4	4	4		4	4	4
+	
+	
 	1	1	1		1	1	1
 	2	2	2		2	2	2
 	3	3	3		3	3	3
@@ -293,6 +299,17 @@ another|default(omit)
 
 
 Chapter 6:
+
+Ansible Tower: 
+
+ansible core
+
+1. GUI Service   NGinx
+2. Postgresql Database
+3. Messaging Service RabiitMQ
+4. supervisord.service
+
+3.6/3.7 onwards redis Database
 
 Run a Job:
 1. Organization

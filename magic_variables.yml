@@ -1,0 +1,11 @@
+- name: Magic Variables Demo
+  hosts: all
+  tasks:
+  - name: Print the Hostname
+    debug:
+      msg: |
+            "{{ inventory_hostname }} 
+             {{ ansible_fqdn }}
+             {{ ansible_facts.fqdn }}
+             {{ ansible_facts['fqdn'] }}"
+    when: inventory_hostname in groups["dev"]

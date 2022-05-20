@@ -1,0 +1,26 @@
+- name: Good vs Bad Practises
+  hosts: servera*
+  become: true
+   
+  vars:
+    get_content: "sdasd"
+   
+  #roles:
+  #- role: web_server
+  #  #web_server_get_content: "We are Overriding"
+  #- role: somerole1
+  #- role: somerole2
+   
+   
+  tasks:
+  #- name: Install Web Packages (Bad Practises)
+  #  yum: name=httpd state=latest
+   
+  - name: Install Web Packages (Good Practises)
+    yum:
+      name: httpd
+      state: latest
+  - name: Install Firewalld Packages (Good Practises)
+    yum:
+      name: firewalld
+      state: latest

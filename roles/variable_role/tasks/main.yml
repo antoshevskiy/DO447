@@ -1,0 +1,5 @@
+---
+# tasks file for variable_role
+- name: Print the Values
+  debug:
+    msg: "Current Value is = {{ variable_level }} "

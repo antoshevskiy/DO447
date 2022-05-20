@@ -1,0 +1,51 @@
+- name: Install the packages on the web servers
+  hosts: servera*
+  become: True
+  #gather_facts: true
+  tasks:
+  #- name: Print
+  #  debug:
+  #    msg: "Hello Everyone"
+ 
+  - name: Ensure the packages are installed
+    yum:
+      name: httpd
+      state: latest
+  - name: Syart Service
+    service:
+      name: httpd
+      state: restarted
+  #- name: Ensure the packages are installed (Single Trip)
+  #  yum:
+  #    name:
+  #    - httpd
+  #    - mod_ssl
+  #    - httpd-tools
+  #    - mariadb-server
+  #    - mariadb
+  #    - php
+  #    - php-mysqlnd
+  #    - vsftpd
+  #    state: present
+ 
+  #- name: Start multipl services
+  #  service:
+  #    name: "{{ item }}"
+  #    state: started
+  #  loop:
+  #    - httpd
+  #    - mysqld
+  #    - vsftpd
+ 
+  #- name: Ensure the packages are installed (Multiple Round Trip)
+  #  yum:
+  #    name: "{{ item }}"
+  #    state: present
+  #  loop:
+  #    - httpd
+  #    - mod_ssl
+  #    - httpd-tools
+  #    - mariadb-server
+  #    - mariadb
+  #    - php
+  #    - php-mysqlnd

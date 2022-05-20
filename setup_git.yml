@@ -13,3 +13,5 @@
       value: daniel@lab.example.com
     - name: push.default
       value: simple
+    - name: credential.helper
+      value: store

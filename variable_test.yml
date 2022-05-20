@@ -1,29 +1,41 @@
-- name: Variable Testing
-  hosts: dev
+- name: Check Variable Level
+  hosts: all
   gather_facts: no
-
   vars:
-    var1: "vars section Level 8"
-
-  vars_prompt:   ## recommded at development level
-  - name: var1
-    prompt: "Enter your Value Level 9"
+    variable_level: "Level 12"
+  vars_prompt:
+  - name: variable_level
+    prompt: "Enter Variable Value Please"
     private: no
-
-  vars_files: ## recommedned
-  - ./external_vars.yml
-
+       
+  vars_files:
+  - /home/student/sec/custom_vars.yml
+       
+  #roles:
+  #- role: variable_role
   tasks:
-  - name: Create Fact on Fly
+  - name: Set a Fact Value
     set_fact:
-      var1: "Value on Fly Level 12"
-
-  - name: Variable Print 1
-    debug:
-      msg: "{{ var1 }}" ##{{ ansible_distribution }}"
+      variable_level: "Level 19"
+       
+  - name: Include a variable File
+    include_vars: newvars.yml
+       
+  - name: Block for Showing Variable
+    block:
+      - name: Import a ROLE
+        import_role:
+          name: variable_role
+        vars:
+          variable_level: "Level 17"
+       
+      - name: Include a ROLE
+        include_role:
+          name: variable_role
+        vars:
+          variable_level: "Level 20"
+      - name: TTTTTTTTTTTTT
+        debug:
+          msg: "{{ variable_level }}"
     vars:
-      var1: "Level 11 NOT happy with 10"
-
-  - name: Variable Print 2
-    debug:
-      msg: "{{ var1 }}"
+      variable_level: "Level 16"

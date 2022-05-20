@@ -1,8 +1,7 @@
 - name: Configuration Playbook
   hosts: servera*
   remote_user: devops
-  become: true
-  gather_facts: yes
+  become: false
   tasks:
   - name: Task Outside Block 1
     debug:
@@ -13,6 +12,7 @@
       immediate: yes
       permanent: yes
       state: enabled
+    become: true
        
   - name: Block for Web Server Tasks
     block:
@@ -23,17 +23,19 @@
       - name: Create file task
         copy:
           content: "Hello Ansible Playbook"
-          dest: "/var/WWWWwww/html/first.html"
+          dest: "/var/www/html/first.html"
       - name: Start httpd service
         service:
           name: httpd
           state: restarted
+    become: true
     when: ansible_distribution == "RedHat"
     rescue:
       - name: rollback install
         yum:
           name: httpd
           state: absent
+        become: true
       - name: rollback cnahed config
         debug:
           msg: "Hey uninstall changed configsk"
@@ -45,4 +47,3 @@
   - name: Task Outside Block 2
     debug:
       msg: "Hello i am outside TOO"
-~                                              

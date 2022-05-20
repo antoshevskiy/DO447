@@ -1,0 +1,56 @@
+- name: Configuration Playbook
+  hosts: servera*
+  remote_user: devops
+  become: true
+  tasks:
+  - name: Open Firewall Port
+    firewalld:
+      service: http
+      immediate: yes
+      permanent: yes
+      state: enabled
+    notify:
+    - Start firewalld service
+    - Extra Handler 1
+ 
+  - name: One Extra Task
+    command: sleep 2
+    notify:
+    - some_handler
+ 
+  - name: Force all notified handlers to run at this point
+    meta: flush_handlers
+ 
+  - name: Install Package Task
+    yum:
+      name: httpd
+      state: present
+    notify:
+    - Start httpd service
+  - name: Create file task
+    copy:
+      content: "Hello Ansible Playbook"
+      dest: "/var/www/html/first.html"
+    notify:
+    - Start httpd service
+    - Extra Handler 2
+ 
+ 
+  handlers:
+  - name: Start httpd service
+    service:
+      name: httpd
+      state: restarted
+  - name: Start firewalld service
+    service:
+      name: firewalld
+      state: restarted
+  - name: some_handler
+    debug:
+      msg: "I am SOME Handler 1"
+  - name: Extra Handler 1
+    debug:
+      msg: "I am Extra Handler 1"
+  - name: Extra Handler 2
+    debug:
+      msg: "I am Extra Handler 22 TOO"

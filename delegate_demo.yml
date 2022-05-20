@@ -1,0 +1,28 @@
+- name: Good vs Bad Practises
+  hosts: servera*
+  become: true
+ 
+  tasks:
+  - name: Collect Facts
+    setup:
+    delegate_facts: true
+ 
+  - name: Open Firewall Port
+    firewalld:
+      service: http
+      immediate: yes
+      permanent: yes
+      state: enabled
+ 
+  - name: Create user n serverb
+    user:
+      name: "{{ ansible_local.jason.user_info.first_name }}"
+    delegate_to: serverb.lab.example.com
+ 
+  - name: Install Web Packages
+    yum:
+      name: httpd
+      state: latest
+    delegate_to: serverf.lab.example.com
+    delegate_facts: yes
+

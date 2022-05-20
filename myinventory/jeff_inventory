@@ -1,0 +1,32 @@
+[control]
+localhost
+
+[control:vars]
+ansible_connection=local
+#ansible_user=devops
+#ansible_port=22
+
+[dev]
+serverd.lab.example.com
+servera.lab.example.com #ansible_become=true
+serverb.lab.example.com  variable_level="Level 8"
+
+
+
+[dev:vars]
+variable_level="Level 3"
+ansible_become_user = root
+#ansible_port=2222
+
+[test]
+172.25.250.11
+172.25.250.12
+serverc.lab.example.com
+serverd.lab.example.com
+serverf.lab.example.com
+172.25.250.10
+
+
+[prod]
+Load_Balancer1  ansible_host=servere.lab.example.com
+

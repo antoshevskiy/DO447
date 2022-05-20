@@ -1,0 +1,37 @@
+- name: List and Dictionary
+  hosts: servera*
+ 
+ 
+  vars_files:
+  - ./newvars.yml
+ 
+  tasks:
+  - name: Print List
+    debug:
+      msg: "{{ item }}"
+    with_list: "{{ simple_list }}"
+    #loop: "{{ simple_list }}"
+ 
+  - name: Print List
+    debug:
+      msg: "{{ item }}"
+    loop: "{{ lookup('list', simple_list ) }}"
+ 
+  #- name: Print Complex List
+  #  debug:
+  #    msg: "{{ item.first_name | capitalize }} // {{ item.last_name | upper}} {{ complex_list[1].first_name }}"
+  #  loop: "{{ complex_list }}"
+ 
+ 
+  - name: Print Dictionary 1
+    debug:
+      msg: "{{ item.key }} ----- {{ item.value }}"
+    loop: "{{ lookup('dict', mydict ) }}"
+    #with_dict: "{{ mydict }}"
+    #loop: "{{ mydict | dict2items }}"
+    #loop came from ansible 2.5 onwards
+  - name: Print Dictionary 2
+    debug:
+      msg: "{{ item }}"
+    with_dict: "{{ mydict }}"
+    #loop: "{{ mydict | dict2items }}"
