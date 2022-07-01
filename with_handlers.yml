@@ -1,0 +1,59 @@
+- name: With Handlers (Dependency Task)
+  hosts: servera
+ 
+ 
+  ## Main tasks in TASKS Section
+  tasks:
+  - name: Install Web packages (Good Practise)
+    yum:
+      name: httpd
+      state: latest
+    notify:
+    - Start web service
+ 
+ 
+  - name: Install Web App
+    copy:
+      content: "Hello Everyone"
+      dest: /var/www/html/first.html
+    notify:
+    - Start web service
+    - Info for deploy application
+ 
+ 
+  - name: Install Firewalld packages (Good Practise)
+    yum:
+      name: firewalld
+      state: latest
+    notify:
+    - Start firewalld service
+    - Install for security Packages
+ 
+  - name: Open firewalld Port
+    firewalld:
+      service: http
+      permanent: yes
+      state: enabled
+      immediate: yes
+    notify:
+    - Start firewalld service
+ 
+  ## Dependency tasks in Handlers Section
+  handlers:
+  - name: Install for security Packages
+    debug:
+      msg: " Called by installing Security Packages"
+ 
+  - name: Info for deploy application
+    debug:
+      msg: "Application Deployed"
+ 
+  - name: Start web service
+    service:
+      name: httpd
+      state: started
+ 
+  - name: Start firewalld service
+    service:
+      name: firewalld
+      state: restarted

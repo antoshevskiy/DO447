@@ -1,41 +1,47 @@
-- name: Check Variable Level
-  hosts: all
+- name: Variable Demo for class
+  hosts: prod
+  #,dev
   gather_facts: no
+ 
+ 
   vars:
-    variable_level: "Level 12"
+    texas_var: "Level12_Playbook_vars"
+
   vars_prompt:
-  - name: variable_level
-    prompt: "Enter Variable Value Please"
+  ##   Level13_Playbook_vars_prompt ##
+  - name: texas_var
+    prompt: Enter the Value
     private: no
-       
+ 
   vars_files:
-  - /home/student/sec/custom_vars.yml
-       
-  #roles:
-  #- role: variable_role
+  - /home/student/texas/outside_vars.yml
+ 
+  roles:
+  - role: variable_role
+ 
   tasks:
-  - name: Set a Fact Value
+  - name: Set the FACT
     set_fact:
-      variable_level: "Level 19"
-       
-  - name: Include a variable File
-    include_vars: newvars.yml
-       
-  - name: Block for Showing Variable
-    block:
-      - name: Import a ROLE
-        import_role:
-          name: variable_role
-        vars:
-          variable_level: "Level 17"
-       
-      - name: Include a ROLE
-        include_role:
-          name: variable_role
-        vars:
-          variable_level: "Level 20"
-      - name: TTTTTTTTTTTTT
-        debug:
-          msg: "{{ variable_level }}"
+      texas_var: "Level19_set_fact_Module"
+  - name: Includ the extra VARIBLE FILE
+    include_vars:
+      file: include_extra_vars.yml
+  - name: Include the role from outside
+    include_role:
+      name: variable_role
     vars:
-      variable_level: "Level 16"
+      texas_var: "Level20_include_role_Module"
+ 
+  - name: Block for Variable
+    block:
+        - name: Just a Task1
+          debug:
+            msg: "{{ texas_var }}"
+          vars:
+            texas_var: "Level17_Playbook_TASK_vars"
+ 
+        - name: Just a Task2
+          debug:
+            msg: "{{ texas_var }}"
+    vars:
+      texas_var: "Level16_Playbook_BLOCK_vars"

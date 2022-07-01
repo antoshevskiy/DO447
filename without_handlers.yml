@@ -1,0 +1,21 @@
+- name: Without Handlers (Dependency Task)
+  hosts: servera
+  tasks:
+ 
+  - name: Install Web packages (Good Practise)
+    yum:
+      name: httpd
+      state: latest
+    register: luis_output
+ 
+ 
+  - name: Print the previous task output
+    debug:
+      msg: "{{ luis_output }}"
+ 
+ 
+  - name: Start web service
+    service:
+      name: httpd
+      state: started
+    when: luis_output.changed == true

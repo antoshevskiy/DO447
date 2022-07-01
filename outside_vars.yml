@@ -1,0 +1,37 @@
+texas_var: "Level14_Playbook_vars_Files"
+ 
+iplist:
+- 10.10.2.20/8
+- 172.25.250.254/16
+- 188.22.44.55/16
+- 192.168.2.122/24
+- 76.44.77.99/8
+- 192.268.5.22/24
+- ::1
+ 
+ 
+## List starts with '-'
+simple_list:
+- john
+- michele
+- robert
+- jason
+ 
+## Complex List
+complex_list:
+- key: john
+  value: Zheng
+- key: jason
+  value: JASON
+- key: robert
+  value: Millaway
+- key: michele
+  value: Zacharka
+ 
+## Dict is key: value pair
+## key: value
+simple_dict:
+  john: Zheng
+  jason: JASON
+  robert: Millaway
+  michele: Zacharka
