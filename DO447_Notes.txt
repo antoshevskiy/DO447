@@ -14,20 +14,22 @@ Experience and Prerequisites:
 City/Timezone: 
 Hobbies:
 
-EST 	4
-CST		2
-MST
-PST		2
-
-RH294		2 (David,Luis,John)			
-DO407					
-DO417		1(Luis)		
-No Course	1(Jason,Michele,Richard,Robert)	
-
-DO447-RHAE2.8-en-1-20200501
 
 
-
+Announcement 1: Labs are Extended for 14 Days
+Announcement 2: Download Material from 
+				https://github.com/navdeepsachdeva/DO447.git
+Announcement 3: 
+			Check email for Attendance Certificate
+Announcement 4: 
+                         Chapter 13: 
+                         	GE 481
+                        Chapter 14:
+                        	GE 500
+                        	GE 510
+                        	GE 516
+                        Chapter 15:
+                        	LAB 528   535    544   547   552   558    568    577
 
 
 Chapter 1:
