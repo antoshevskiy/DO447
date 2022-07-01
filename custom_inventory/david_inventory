@@ -1,0 +1,27 @@
+
+[dev]
+servera #ansible_become=false
+serverb
+
+
+[test]
+Load_Balancer1 ansible_host=serverc
+Load_Balancer2 ansible_host=serverd
+
+
+[prod]
+servere
+serverf texas_var="Level8_Inventory_File_Specific_ServerF"
+
+
+[all:vars]
+texas_var="Level3"
+
+
+[control]
+workstation
+localhost
+#ansible_connection=local
+
+[ips]
+172.25.250.[10:15]

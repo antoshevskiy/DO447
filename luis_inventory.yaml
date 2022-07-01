@@ -1,0 +1,37 @@
+ungrouped:
+  hosts:
+     me.example.com: {}
+dev:
+  hosts:
+    servera: {}
+    serverb: {}
+  vars:
+    var1: value_dev
+ 
+ 
+test:
+  hosts:
+    serverc:
+      var1: value_c
+    serverb: {}
+    serverd: {}
+    serverf: {}
+  vars:
+    var1: value_test
+ 
+prod:
+  hosts:
+    servere: {}
+    serverb: {}
+    serverf: {}
+  vars:
+    var1: value_prod
+ 
+control:
+  hosts:
+    workstation: {}
+    localhost:
+      ansible_connection: local
+ranges:
+  hosts:
+    SYSTEM_[1:5].lab.example.com

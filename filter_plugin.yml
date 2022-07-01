@@ -1,0 +1,8 @@
+- name: Network Filter Pligin
+  hosts: servera
+  vars_files:
+  - outside_vars.yml
+  tasks:
+  - name: Print the IPS
+    debug:
+      msg: "{{ iplist | ipaddr | ipv4('private') }}"
